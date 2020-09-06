@@ -16,7 +16,7 @@
                                     <h3><label>ID user ANDA : </label><i class="text-success">{{$user->id}}</i></h3>
                                    
                                     <label>MASUKKAN ID User ANDA</label><br>
-                                        <textarea name="id" class="form-control" placeholder="MASUKKAN ID ANDA" ></textarea> 
+                                        <textarea name="id" value="{{Auth::user()->id}}" class="form-control" disabled placeholder="{{Auth::user()->id}}" ></textarea> 
                                          <label>Ambil antrian</label><br>
                                          <select  class="form-control input-lg" >
                                              <option name="antrian" id="antrian" value="antrian">{{$antrian}}</option>

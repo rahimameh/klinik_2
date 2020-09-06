@@ -33,16 +33,16 @@ class AntrianController extends Controller
 
     public function tambah( Request $request,$id)
     { 
-        // $time= Carbon::now()->locale('id')->translatedFormat('d-m-Y');
-        // $cek=User::where('created_at','=',$time)->get();
+        $time= Carbon::now()->locale('id')->translatedFormat('d-m-Y');
+        $cek=User::where('created_at','=',$time)->get();
         $an= $request->antrian;
-        if(count($an)==0){
+        if($cek->count()==0){
             $antrian=1;
-            foreach($an as $c){
+            foreach($cek as $c){
                 $antrian= $an->count()+1;
             }
         }else{
-                foreach($an as $c){
+                foreach($cek as $c){
                 $antrian= $cek->count()+1;
                 }
             }
@@ -57,11 +57,11 @@ class AntrianController extends Controller
     {    
         // $time= Carbon::now()->locale('id')->translatedFormat('Y-m-d');
         // $cek=User::where('created_at','=',$time)->get();
-        $user = User::where('id',$request->get('id'))->first();
+        $user = Auth::user()->id;
         // $i = Antrian::where('id_antri',$request->get('antrian'))->first();
         // $user_id= $user->id;
         // // $a= $user->antri();
-// $user= $request->get('id');
+        // $user= $request->get('id');
         $antrian= $request->antrian;
         $time= Carbon::now()->locale('id')->translatedFormat('d-m-Y');
         // $cek=Antrian::where('created_at','=',$time)->get();
@@ -76,13 +76,15 @@ class AntrianController extends Controller
         //         }
         //     }
        
-       $tung= $antrian->count()+1;
+       $tung= $antrian+1;
+    //    return $user;
         $antri = Antrian::create([
-                'nomor_antrian' =>  $antrian,
+                'nomor_antrian' =>  $tung,
                 'user_id' => $user
             ]);
             
-      return dd($antri);
+            return view ('Antrian.antrian',compact('user','antrian'));      
+            //   return dd($antri);
     }
 
     public function delete($id)
