@@ -12,6 +12,11 @@
                                     
 								</div>
 							<div class="panel-body">
+                            <div class="col-md-4">
+                                <form action="/user/cari" method="GET">
+                            <input type="text" style="position:right;" name="cari" placeholder="Cari user .." value="{{ old('cari') }}">
+                            <button type="submit" value="CARI" ><i class="fa fa-search">cari</i></button>
+                                </div><br>
 									<table class="table table-hover">
 										<thead>
 											<tr>
@@ -22,7 +27,8 @@
                                                 <th>Nama</th>
                                                 <th>Keterangan</th>
                                                 <th>Email</th>
-                                                <th>Opsi</th>
+                                            
+                                
 											</tr>
 										</thead>
 										<tbody>
@@ -36,8 +42,8 @@
                                                 <td>{{ $p->name}}</td>                                           
                                                 <td> {{$p->role}}</td>
                                                <td>{{$p->email}}</td>
-                                               <td><a href="/user/delete/{{ $p->id }}" class="btn btn-danger" onclick="return confirm('yakin ingin dihapus')"><i class="fa fa-trash-o"></i>Hapus</a>
-                                               </td>
+                                              
+                                               
                                             </tr>
                                             @endforeach
 										</tbody>

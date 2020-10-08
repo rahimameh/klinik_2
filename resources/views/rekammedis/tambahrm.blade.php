@@ -13,13 +13,12 @@
                                   <form method="post" action="/rm/store">
                                     {{ csrf_field() }}
                                     <div class="form-group">          
-                               
-                                    <h3><label>ID PASIEN ANDA : </label><i class="text-success">{{$pasien->id}}</i></h3>
+                            
+                                    <h3><label>ID PASIEN : </label><i class="text-success">{{$pasien->id}}</i></h3>
                                     <div class="col-md-4">
-                                    <label>MASUKKAN ID PASIEN ANDA</label><br>
-                               
-                                        <textarea name="id" class="form-control" placeholder="MASUKKAN ID ANDA" ></textarea>                                                           
-                                    <br>
+                                    <label>MASUKKAN ID PASIEN </label><br>
+                   <input class="form-control" name="id" value="{{$pasien->id}}" id="id" readonly="readonly" placeholder="{{$pasien->id}}"></h1>
+    <br>
                                         <label>Keluhan</label><br>
                                         <textarea name="keluhan" class="form-control"  ></textarea> 
                                                @if($errors->has('keluhan'))

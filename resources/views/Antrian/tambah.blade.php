@@ -8,23 +8,26 @@
                 <div class="col-nd-12">
                     <div class="panel">
 						<div class="panel-heading">
-						    <h2>    Tambah Antrian</h2>
+						 
 							<div class="panel-body">
+                            <h1>Tambah Antrian</h1>
                                   <form method="post" action="/antrian/store">
                                     {{ csrf_field() }}
-                                    <div class="form-group">          
-                                    <h3><label>ID user ANDA : </label><i class="text-success">{{$user->id}}</i></h3>
-                                   
-                                    <label>MASUKKAN ID User ANDA</label><br>
-                                        <textarea name="id" value="{{Auth::user()->id}}" class="form-control" disabled placeholder="{{Auth::user()->id}}" ></textarea> 
-                                         <label>Ambil antrian</label><br>
-                                         <select  class="form-control input-lg" >
-                                             <option name="antrian" id="antrian" value="antrian">{{$antrian}}</option>
-                                         </select>
-                                         
-                                        <br>
+                                    <div class="form-group">   
+                                    
+                                    <label>ID PASIEN ANDA</label><br>
+                   <input class="form-control" name="id" value="{{$pasien}}" id="id" readonly="readonly" placeholder="{{$pasien}}"></h1>
+    <br>
+                                    <div class="panel-body no-padding bg-primary text-center">
+									<div class="padding-top-30 padding-bottom-30">
+										<i class="fa fa-chevron-circle-down fa-5x"></i>
+										<h3>AMBIL ANTRIAN DISINI</h3>
+									</div>
+								</div>            
+<input class="form-control input-lg" style="text-align:center" name="antrian" value="{{$antrian}}" id="antrian" readonly="readonly" placeholder="{{$antrian}}"></h1>
+                                         <br>
                                     </div>
-                                    <input type="submit" class="btn btn-success" value="Simpan">
+                                    <input type="submit" class="btn btn-success btn-block" value="AMBIL">
                                 </form> 
 							</div>
 						</div>

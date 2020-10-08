@@ -10,7 +10,7 @@ class DokterController extends Controller
 {
     public function index()
     {
-        $datadokter=Dokter::all()->sortBy('nama');
+        $datadokter=Dokter::all()->sortBy('created_at');
         return view('dokter.dokter',['dokter'=>$datadokter]);
     }
 
@@ -21,6 +21,14 @@ class DokterController extends Controller
 
     public function store( Request $request)
     {
+        $this->validate($request,[
+            'nama' => 'required',
+            'gender'=>'required',
+            'umur' => 'required',
+            'alamat' => 'required',
+            'email'=>'required'
+            ]);
+
         $user = new \App\User;
         $user->role = 'dokter';
         $user->name = $request->nama;
@@ -59,14 +67,22 @@ class DokterController extends Controller
         
             $dokter =Dokter::find($id);
             $dokter->update($request->all());
+
+            $user_id= $dokter->user()->update([
+                'name'=>$request->nama,
+                'email' => $request->email
+                ]);
             return redirect('/dokter')->with(['success' => 'Data berhasil diedit']);;
     }
 
         // proses hapus
     public function delete($id)
     {    $dokter = Dokter::find($id);
+        $user_id= $dokter->user();
+
         $dokter->delete();
-        return redirect('/dokter')->with(['error' => 'Data berhasil dihapus']);;
+        $user_id->delete();
+        return redirect('/dokter')->with(['error' => 'Data berhasil dihapus']);
     }
 
 }

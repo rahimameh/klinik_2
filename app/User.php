@@ -34,19 +34,19 @@ class User extends Authenticatable
      * @var array
      */
   public function dokter(){
-      return $this->hasOne('App\Dokter','users_id');
+      return $this->hasOne('App\Dokter','users_id');//1 user 1 dokter
   }
 
     public function pasien(){
-        return $this->belongsTo('App\Pasien');
+        return $this->hasOne('App\Pasien');//1 user 1 pasien
     }
 
     public function antri(){
-        return $this->hasMany('App\Antrian','user_id'); 
+        return $this->hasMany('App\Antrian','user_id'); //1 user bnyk antrian u/ setiap saat
        }
 
-       public function rmdok(){
-        return $this->hasMany('App\Rekammedis'); 
+       public function rm(){
+        return $this->hasMany('App\Rekammedis'); //1 user banyak rekammedis
        }
 
     }

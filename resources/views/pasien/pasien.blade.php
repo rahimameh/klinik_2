@@ -24,15 +24,15 @@
   
                             <div class="panel body"> 
                                 <h1>Data Pasien</h1></br>
-                                   @if(auth()->user()->role == 'admin')    
-                                <a href="/pasien/tambah" class="btn btn-success"><i class="fa fa-user-plus"></i> Pasien Baru</a>
-                                <a href="/pasien/cetak_pdf" class="btn btn-primary"><i class="fa fa-print"></i> Cetak</a>
-                                @endif                              
+            @if(auth()->user()->role == 'admin')    
+                                <a href="/pasien/tambah" class="btn btn-success"><i class="fa fa-user-plus"></i> Tambah pasien</a>
+                                <!-- <a href="/pasien/cetak_pdf" class="btn btn-primary"><i class="fa fa-print"></i> Cetak</a> -->
+                    @endif                              
                             </div>                 
                                 <div class="col-md-4">
                                 <form action="/pasien/cari" method="GET">
                             <input type="text" style="position:right;" name="cari" placeholder="Cari pasien .." value="{{ old('cari') }}">
-                            <button type="submit" value="CARI" ><i class="fa fa-search"></i></button>
+                            <button type="submit" value="CARI" ><i class="fa fa-search">cari</i></button>
                                 </div><br>
     
 									<table class="table table-hover ">
@@ -60,10 +60,10 @@
                                                 <td>{{ $p->alamat }}</td>       
                                                 <td>{{ $p->id}}</td>
                                                 <td>                                                
-                                <a href="/rm/{{$p->id}}" class="btn btn-primary"><i class="fa fa-medkit"></i>Rekam Medis</a> 
+                                <a href="/rm/{{$p->id}}" class="btn btn-primary"><i class="fa fa-medkit"></i>rekam medis</a> 
                                 @if(auth()->user()->role == 'admin')                            
-                                <a href="/pasien/edit/{{ $p->id }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                <a href="/pasien/delete/{{ $p->id }}" class="btn btn-danger" onclick="return confirm('yakin ingin dihapus')"><i class="fa fa-trash-o"></i></a>
+                                <a href="/pasien/edit/{{ $p->id }}" class="btn btn-warning"><i class="fa fa-edit"></i>edit</a>
+                                <a href="/pasien/delete/{{ $p->id }}" class="btn btn-danger" onclick="return confirm('yakin ingin dihapus')"><i class="fa fa-trash-o"></i>hapus</a>
                                 @endif
                                             </tr>
                                             @endforeach

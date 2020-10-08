@@ -19,4 +19,15 @@ class UserController extends Controller
         $users->delete();
         return redirect('/pengguna');
     }
+    public function cari(Request $request)
+	{
+		// menangkap data pencarian
+		$cari = $request->cari;
+ 
+    		// mengambil data dari table pasien sesuai pencarian data
+		$users = User::where('name','like',"%".$cari."%")
+        ->paginate(5);
+
+        return view ('pengguna.pengguna', ['users' => $users]);
+    }
 }

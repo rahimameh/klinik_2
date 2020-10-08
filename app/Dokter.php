@@ -13,5 +13,8 @@ class Dokter extends Model
     protected $keyType='String';
     public $incrementing= false;
 
-  
+    public function user(){
+        return $this->belongsTo('App\User','user_id'); //1 user 1 dokter
+       }
+      
 }

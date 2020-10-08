@@ -61,12 +61,14 @@
                                         @endif
                                        </div>
                                         <br>
-                                    </div>                                   
+                                    </div>   
+                                    </div>
+                                    <a href="/dokter" class="btn btn-primary">Kembali</a>
+                                    <input type="submit" class="btn btn-success" value="Simpan">                                
                                 </form> 
                             </div>
-                            <a href="/dokter" class="btn btn-primary">Kembali</a>
-                                    <input type="submit" class="btn btn-success" value="Simpan">
-                        </div>
+                           
+                       
                     </div>
                 </div>
             </div>

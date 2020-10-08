@@ -20,11 +20,19 @@
                     <img src="{{asset('admin/assets/img/index.png')}}" height="22" width="22" class="img-circle" alt="Avatar">
                     {{ Auth::user()->name }} <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-					<li><a href="#"><i class="lnr lnr-user"></i> <span>Profil Saya</span></a></li>                             
-                                <li><a href="{{ route('logout') }}"  onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();"><i class="lnr lnr-exit" ></i> <span>Logout</span></a></li>
-                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-									
+
+                    @if(auth()->user()->role != 'admin')
+					<li><a href="/profil"><i class="lnr lnr-user"></i> <span>Profil Saya</span></a></li> 
+                    				
+                  
+                    @endif                                 
+                    
+                    <li><a href="{{ route('logout') }}"  onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();"><i class="lnr lnr-exit" ></i> <span>Logout</span></a></li>
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					
+
+
                                     @csrf
                                 </form>    
                         </ul>

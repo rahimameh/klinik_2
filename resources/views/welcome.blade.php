@@ -9,7 +9,28 @@
        
         <!-- background -->
         <link rel="icon" type="image/png" sizes="96x96" href="{{asset('admin/assets/img/apple-icon.png')}}">
- 
+    </head>
+    <body >
+        <div class="flex-center position-ref full-height">
+            @if (Route::has('login'))
+                <div class="top-right links">
+                    @auth
+                        <a href="{{ url('/home') }}">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}">Login</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
+            <div class="content">
+            <img src="{{asset('admin/assets/img/DAUN1.jpg')}}" height="648" width="1355">
+             </div>
+        </div>
+    </body>
+    
         <!-- Styles -->
         <style>
             html, body {
@@ -59,25 +80,4 @@
 
            
         </style>
-    </head>
-    <body >
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-            <div class="content">
-            <img src="{{asset('admin/assets/img/DAUN1.jpg')}}" height="648" width="1355">
-             </div>
-        </div>
-    </body>
 </html>

@@ -29,11 +29,19 @@ class PasienController extends Controller
     }
 
         // buat memproses inputan di tambah
-    public function store (Request $request) 
+    public function store (Request $request)//depidensi,Request $request hapus, dibawahnya jangan $request,ganti Request::
     {   
+        $this->validate($request,[
+            'nama' => 'required',
+            'gender'=>'required',
+            'umur' => 'required',
+            'alamat' => 'required',
+            'email'=>'required'
+            ]);
 
+//act,sequence,pake fork
 
-        $user = new \App\User;
+        $user = new \App\User;//compotition
         $user->role = 'pasien';
         $user->name = $request->nama;
         $user->email = $request->email;
@@ -57,6 +65,7 @@ class PasienController extends Controller
     {
             // bikin variable $pasien buat naro data yg dipanggil berdasarkan id d database lewat model 
              $pasien = Pasien::find($id);
+             
             //  lempar ke folder pasien file edit blade
              return view ('pasien.edit',['pasien'=> $pasien]);
     }        
@@ -73,6 +82,12 @@ class PasienController extends Controller
         
             $pasien= Pasien::find($id);
             $pasien->update($request->all());
+         
+            $user_id= $pasien->user()->update([
+            'name'=>$request->nama,
+            'email' => $request->email
+            ]);
+           
 
             return redirect('/pasien')->with(['success' => 'Data berhasil diedit']);
     }
@@ -80,7 +95,12 @@ class PasienController extends Controller
         // proses hapus
     public function delete($id)
     {    $pasien = Pasien::find($id);
+        $rm= $pasien->rm();
+        $user_id= $pasien->user();
+//ketika data pasien dihapus,maka data usernya,data rekammedisnya ikut terhapus
         $pasien->delete();
+        $rm->delete();
+       $user_id->delete();
         return redirect('/pasien')->with(['error' => 'Data berhasil dihapus']);
     }
 
@@ -92,36 +112,19 @@ class PasienController extends Controller
  
     		// mengambil data dari table pasien sesuai pencarian data
 		$pasien = Pasien::where('nama','like',"%".$cari."%")
-		->paginate(5);
- 
-    		// mengirim data pasien ke view index
-            return view ('pasien.pasien', ['pasien' => $pasien]);
- 
+        ->paginate(5);
+
+        return view('pasien.pasien',compact('pasien'))->with(['error' => 'Data berhasil ditemukan']);
+       
     }
 
-    public function cetak_pdf()
-    {
-    	$pasien = Pasien::all();
+    // public function cetak_pdf()
+    // {
+    // 	$pasien = Pasien::all();
  
-    	$pdf = PDF::loadview('pasien.pasien_pdf',['pasien'=>$pasien]);
-    	return $pdf->stream();
-    }
+    // 	$pdf = PDF::loadview('pasien.pasien_pdf',['pasien'=>$pasien]);
+    // 	return $pdf->stream();
+    // }
 
-    public function antrian ()
-  {
-    $time= Carbon::now()->locale('id')->translatedFormat('Y-m-d');
-    $cek=Pasien::where('created_at','=',$time)->get();
-    if($cek->count()==0){
-        $antrian=1;
-        foreach($cek as $c){
-            $antrian= $cek->count()+1;
-        }
-    }else{
-            foreach($cek as $c){
-            $antrian= $cek->count()+1;
-            }
-        }
-    
-    return $antrian;
-  }
+  
 }
